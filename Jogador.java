@@ -3,9 +3,9 @@ public abstract class Jogador {
     protected int posição;
     protected int jogadas;
 
-    public Jogador(String cor, int posição, int jogadas){
+    public Jogador(String cor, int jogadas){
         this.cor=cor;
-        this.posição=posição;
+        posição = 0;
         this.jogadas=jogadas;
     }
 
