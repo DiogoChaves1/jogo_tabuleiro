@@ -9,7 +9,7 @@ class Tabuleiro {
         jogadores = new ArrayList<Jogador>();
     }
 
-    public boolean AddJogador(Jogador newJogador){
+    public boolean addJogador(Jogador newJogador){
         if(jogadores.contains(newJogador) || jogadores.size() > 5 )
             return false;
 
