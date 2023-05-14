@@ -1,4 +1,1 @@
 qualquer coisa 
-
-
-ass yuri
