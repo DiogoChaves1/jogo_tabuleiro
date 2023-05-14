@@ -15,4 +15,5 @@ public class JogadorSortudo extends Jogador{
 
         return dado1+dado2;
     }
+
 }

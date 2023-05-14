@@ -10,5 +10,4 @@ public abstract class Jogador {
     }
 
     public abstract int jogarDados();
-
 }

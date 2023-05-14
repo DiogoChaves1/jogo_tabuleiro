@@ -1,6 +1,1 @@
-qualquer coisa 2
-
-
-ass yuri oliveira
-
-ass diogo
+Este projeto é um trabalho academico para a disciplina de Programção Orientada a Objetos

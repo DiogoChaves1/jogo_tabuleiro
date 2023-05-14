@@ -10,10 +10,24 @@ class Tabuleiro {
     }
 
     public boolean AddJogador(Jogador newJogador){
-        if(jogadores.contains(newJogador))
+        if(jogadores.contains(newJogador) || jogadores.size() > 5 )
             return false;
 
         jogadores.add(newJogador);
         return true;
     }
+
+    public void mostrarPosição(){
+        for(Jogador j: jogadores){
+        System.out.println(j.toString());
+        }
+    }
+
+    public int getRodada(){
+        return rodada;
+    }
+    public void setRodada(int rodada){
+        this.rodada=rodada;
+    }
+
 }
