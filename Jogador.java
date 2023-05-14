@@ -1,12 +1,12 @@
 public abstract class Jogador {
     protected String cor;
     protected int posição;
-    protected int jogadas;
+    protected int turno;
 
-    public Jogador(String cor, int jogadas){
+    public Jogador(String cor){
         this.cor=cor;
         posição = 0;
-        this.jogadas=jogadas;
+        turno = 0;
     }
 
     public abstract int jogarDados();

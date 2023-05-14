@@ -1,8 +1,8 @@
 import java.util.Random;
 public class JogadorAzarado extends Jogador{
 
-    public JogadorAzarado(String cor, int jogadas ){
-        super(cor, jogadas);
+    public JogadorAzarado(String cor){
+        super(cor);
     }
 
     public int jogarDados(){
