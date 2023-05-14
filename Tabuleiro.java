@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Tabuleiro {
+public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
     private int rodada;
 
@@ -23,6 +23,24 @@ class Tabuleiro {
         }
     }
 
+    public void checkCasasDaSorte(Jogador j) {
+        if( j instanceof JogadorNormal || j instanceof JogadorSortudo) {
+            System.out.println("Voce esta em uma casa da sorte. +3 casas");
+            j.posição += 3;
+            System.out.printf("Posicao atual: %d\n", j.posição);
+        }
+
+        System.out.printf("Posicao atual: %d\n", j.posição);
+    }
+
+    public void casaDeVoltarAoInicio(String cor) {
+        for(Jogador j: jogadores) {
+            if(cor == j.cor) {
+                j.posição = 0;
+            }
+        }
+    }
+    
     public int getRodada(){
         return rodada;
     }
