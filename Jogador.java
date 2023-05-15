@@ -11,6 +11,10 @@ public abstract class Jogador {
         podeJogar = true;
     }
 
+    public String toString() {
+        return cor+", Posicao: " + posição;
+    }
+
     public abstract int jogarDados();
 
     public abstract void setPosicao(int posição);

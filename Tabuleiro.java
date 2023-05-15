@@ -3,6 +3,7 @@ import java.util.*;
 public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
     private int rodada;
+    private Menu menu = new Menu();
 
     public Tabuleiro(){
         rodada = 0;
@@ -55,6 +56,8 @@ public class Tabuleiro {
         System.out.println("Voce esta em uma casa da Discordia, escolha a cor do jogador em que deseja mandar pra tras");
 
         //aqui irá a tela de cores 
+        menu.mostrarJogadores(jogadores);
+
         cor = entrada.nextLine();
         
         for(Jogador jogador: jogadores) {
