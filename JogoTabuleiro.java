@@ -5,6 +5,7 @@ public class JogoTabuleiro {
     public static void main(String args[]){
         Tabuleiro partida = new Tabuleiro();
         int dados; 
+        Menu menu = new Menu();
 
         Jogador newJogador;
         boolean checkGanhador = false;
@@ -29,7 +30,7 @@ public class JogoTabuleiro {
                 dados = jogador.jogarDados();
                 jogador.setPosicao(dados);
                 partida.checkCasasEspeciais(jogador, jogador.posição);
-                //AQUI IRÁ A TELA DE RESUMO DE CADA RODADA
+                menu.mostrarJogadores(partida.getJogadores());
                 if(jogador.posição == 40){  
                     checkGanhador = true;
                     break;

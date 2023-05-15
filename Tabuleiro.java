@@ -3,7 +3,6 @@ import java.util.*;
 public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
     private int rodada;
-    private Menu menu = new Menu();
 
     public Tabuleiro(){
         rodada = 0;
@@ -52,6 +51,7 @@ public class Tabuleiro {
     public void ativarCasaDeTroca() {
         String cor;
         Scanner entrada = new Scanner(System.in);
+        Menu menu = new Menu();
 
         System.out.println("Voce esta em uma casa da Discordia, escolha a cor do jogador em que deseja mandar pra tras");
 
