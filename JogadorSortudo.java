@@ -16,4 +16,8 @@ public class JogadorSortudo extends Jogador{
         return dado1+dado2;
     }
 
+    public void setPosicao(int posição){
+        this.posição = posição;
+    }
+
 }

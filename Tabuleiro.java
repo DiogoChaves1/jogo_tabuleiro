@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
@@ -7,6 +7,21 @@ public class Tabuleiro {
     public Tabuleiro(){
         rodada = 0;
         jogadores = new ArrayList<Jogador>();
+    }
+    public void definirJogador(String cor){
+        Random gerador = new Random();
+        int sorteioTipo= gerador.nextInt(2);
+        Jogador newJogador;
+        switch(sorteioTipo){
+            case 0:
+                newJogador = new JogadorNormal(cor);
+            
+            case 1:
+                newJogador = new JogadorAzarado(cor);
+            
+            default:
+                newJogador = new JogadorSortudo(cor);
+        }
     }
 
     public boolean addJogador(Jogador newJogador){
@@ -23,7 +38,7 @@ public class Tabuleiro {
         }
     }
 
-    public void checkCasasDaSorte(Jogador jogador) {
+    public void ativarCasasDaSorte(Jogador jogador) {
         if( jogador instanceof JogadorNormal || jogador instanceof JogadorSortudo) {
             System.out.println("Voce esta em uma casa da sorte. +3 casas");
             jogador.posição += 3;
@@ -33,47 +48,103 @@ public class Tabuleiro {
         System.out.printf("Posicao atual: %d\n", jogador.posição);
     }
 
-    public void checkCasaDeTroca(String cor) {
+    public void ativarCasaDeTroca() {
+        String cor;
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("Voce esta em uma casa da Discordia, escolha a cor do jogador em que deseja mandar pra tras");
+
+        //aqui irá a tela de cores 
+        cor = entrada.nextLine();
+        
         for(Jogador jogador: jogadores) {
             if(cor == jogador.cor) {
                 jogador.posição = 0;
             }
         }
+
+        System.out.println("Posicao atual (" + cor + ") :" + 0);
+        entrada.close();
     }
 
-    public boolean checkCasaDoAzar(Jogador jogador){
-        if(jogador.posição == 10 || jogador.posição == 25 || jogador.posição == 38){
-            return true;
-        }
+    public void ativarCasaDoAzar(Jogador jogador){
+        System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
 
-        return false;
+        if(jogador.podeJogar == false)
+            jogador.podeJogar = true;
+
+        jogador.podeJogar = false;
     }
 
-    public void checkCasaMagica(Jogador jogador){
-        int menorPosicao = jogador.posição;
-        int indexMenorPosicao = 0;
-
-        for (Jogador jogadorTroca : jogadores) {
-            if(jogadorTroca.posição < menorPosicao){
-                menorPosicao = jogadorTroca.posição;
-                indexMenorPosicao = jogadores.indexOf(jogadorTroca);
+    public int pegarUlitmoJogador(){
+        int ultimaPosicao = 40;
+        int indexUltimo = 0;
+        
+        for (Jogador jogador : jogadores) {
+            if(jogador.posição < ultimaPosicao){
+                ultimaPosicao = jogador.posição;
+                indexUltimo = jogadores.indexOf(jogador);
             }
         }
-        if(menorPosicao == jogador.posição) {  
+
+        return indexUltimo;
+    }
+
+    public void ativarCasaMagica(Jogador jogador){
+        int indexUltimoJogador = pegarUlitmoJogador();
+        int casaUltimoJogador;
+
+        if(indexUltimoJogador == jogadores.indexOf(jogador)) {  
             System.out.println("O jogador " + jogador.cor  + "ja esta na ultima posicao... :´( )");
-            
+
             return;
         }
-        jogadores.get(indexMenorPosicao).posição = jogador.posição;
-        jogador.posição = menorPosicao;
+
+        System.out.println("Voce caiu na casa magica, trocara posicao com o ultimo jogador");
+
+
+        casaUltimoJogador = jogadores.get(indexUltimoJogador).posição;
+        jogadores.get(indexUltimoJogador).posição = jogador.posição;
+        jogador.posição = casaUltimoJogador;
+
+        System.out.printf("Posicao atual: %d\n", jogador.posição);
 
     }
+
+    public void checkCasasEspeciais(Jogador jogador, int posição){
+        switch (posição) {
+            case 10,25,38:
+                ativarCasaDoAzar(jogador);
+                break;
+
+            case 5,15,30:
+                ativarCasasDaSorte(jogador);
+                break;
+
+            case 17,27: 
+                ativarCasaDeTroca();
+                break;
+            
+            case 20,35:
+                ativarCasaMagica(jogador);
+                break;
+                
+            default:
+                break;
+        }
+    }
+
     
     public int getRodada(){
         return rodada;
     }
+
     public void setRodada(int rodada){
         this.rodada=rodada;
+    }
+
+    public ArrayList<Jogador> getJogadores() {
+        return jogadores;
     }
 
 }
