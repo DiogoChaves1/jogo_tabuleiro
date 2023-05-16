@@ -13,17 +13,28 @@ public class JogoTabuleiro {
         String comando;
 
 
-            while(opcao != 1 ){
-                //aqui irá a tela de add jogador e iniciar jogo.
-
+            while(opcao != 1){
+                menu.mostrarMenuInicial();
                 opcao = leitor.nextInt();
                 clearBuffer(leitor);
 
-                if(opcao == 2 ){
+                if(opcao==1){
+                    if(partida.getJogadores().size()>1){
+                        break;
+                    }
+                    else{
+                        System.out.println("________________________________________________");
+                        System.out.println("Necessário ao menos dois jogadores para começar");
+                        System.out.println("________________________________________________");
+                        opcao=0;
+                    }
+                }
+                else if(opcao == 2 ){
                     newJogador = partida.definirJogador();
                     if(partida.addJogador(newJogador)){
                         newJogador.setCor(partida.getJogadores().indexOf(newJogador));
-                        System.out.println("jogador " + newJogador.getCor() + " adicionado com sucesso :)");
+                        menu.mostrarTelaDeAdição(newJogador);
+                      //  System.out.println("jogador " + newJogador.getCor() + " adicionado com sucesso :)");
                     } else 
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
 
