@@ -37,10 +37,42 @@ public class Tabuleiro {
             System.out.println(jogador.toString());
         }
     }
+    public int ativarCasaDeMudança(Jogador jogador){
+        Random gerador = new Random();
+        int tipo, indexJogador=jogadores.indexOf(jogador);
+        tipo = gerador.nextInt(2);
+
+        switch(tipo){    
+            case 0:
+                JogadorAzarado newJogadorAzarado = new JogadorAzarado(jogador.getCor());
+
+                newJogadorAzarado.setPosição(jogador.getPosição());
+                newJogadorAzarado.setTurno(jogador.getTurno());
+                jogadores.set(indexJogador, newJogadorAzarado);
+            
+                return 0;
+            case 1:
+                JogadorSortudo newJogadorSortudo =new JogadorSortudo(jogador.getCor());
+
+                newJogadorSortudo.setPosição(jogador.getPosição());
+                newJogadorSortudo.setTurno(jogador.getTurno());
+                jogadores.set(indexJogador, newJogadorSortudo);
+            
+                return 1;
+            default:
+                JogadorNormal newJogadorNormal = new JogadorNormal(jogador.getCor());
+
+                newJogadorNormal.setPosição(jogador.getPosição());
+                newJogadorNormal.setTurno(jogador.getTurno());
+                jogadores.set(indexJogador, newJogadorNormal);
+                
+                return 2;
+        } 
+    }
 
     public void ativarCasasDaSorte(Jogador jogador) {
         if( jogador instanceof JogadorNormal || jogador instanceof JogadorSortudo) {
-            System.out.println("Voce esta em uma casa da sorte. +3 casas");
+            System.out.println("Voce esta em uma casa da sorte. anda +3 casas");
             jogador.posição += 3;
             System.out.printf("Posicao atual: %d\n", jogador.posição);
         }

@@ -17,5 +17,55 @@ public abstract class Jogador {
 
     public abstract int jogarDados();
 
-    public abstract void setPosicao(int posição);
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(int index) {
+        switch(index){
+            case 0:
+                cor="Branco";
+                break;
+            case 1:
+                cor="Vermelho";
+                break;
+            case 2:
+                cor="Azul";
+                break;
+            case 3:
+                cor="Preto";
+                break;
+            case 4:
+                cor="Amarelo";
+                break;
+            default:
+                cor="Verde";
+                break;
+        }
+    }
+
+    public int getPosição() {
+        return posição;
+    }
+
+    public void setPosição(int posição) {
+        this.posição = posição;
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public boolean isPodeJogar() {
+        return podeJogar;
+    }
+
+    public void setPodeJogar(boolean podeJogar) {
+        this.podeJogar = podeJogar;
+    }
+
 }

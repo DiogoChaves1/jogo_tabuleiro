@@ -28,7 +28,7 @@ public class JogoTabuleiro {
                     continue;
                 }
                 dados = jogador.jogarDados();
-                jogador.setPosicao(dados);
+                jogador.setPosição(dados);
                 partida.checkCasasEspeciais(jogador, jogador.posição);
                 menu.mostrarJogadores(partida.getJogadores());
                 if(jogador.posição == 40){  
