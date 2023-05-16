@@ -79,15 +79,17 @@ public class Tabuleiro {
     public void ativarCasasDaSorte(Jogador jogador) {
         if( jogador instanceof JogadorNormal || jogador instanceof JogadorSortudo) {
             System.out.println("Voce esta em uma casa da sorte. anda +3 casas");
-            jogador.posição += 3;
-            System.out.printf("Posicao atual: %d\n", jogador.posição);
+            jogador.setPosição(3);
+        }else {
+            System.out.println("Voce eh um azarado, nao pode andar na casa da sorte");
         }
 
         System.out.printf("Posicao atual: %d\n", jogador.posição);
     }
 
-    public void ativarCasaDeTroca() {
+    public void ativarCasaDaDiscordia() {
         String cor;
+        int posJogador = 0;
         Scanner entrada = new Scanner(System.in);
         Menu menu = new Menu();
 
@@ -97,24 +99,27 @@ public class Tabuleiro {
         menu.mostrarJogadores(jogadores);
 
         cor = entrada.nextLine();
-        
+
         for(Jogador jogador: jogadores) {
-            if(cor == jogador.cor) {
-                jogador.posição = 0;
+            if(cor.equals(jogador.getCor())) {
+                jogador.setPosição();
+                posJogador = jogador.getPosição();
             }
         }
+        menu.mostrarJogadores(jogadores);
 
-        System.out.println("Posicao atual (" + cor + ") :" + 0);
-        entrada.close();
+        System.out.println("Posicao atual (" + cor + ") : " + posJogador);
+
     }
 
     public void ativarCasaDoAzar(Jogador jogador){
-        System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
-
+        
         if(jogador.podeJogar == false)
-            jogador.podeJogar = true;
-
-        jogador.podeJogar = false;
+        jogador.podeJogar = true;
+        else{  
+            System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
+            jogador.podeJogar = false;
+        }
     }
 
     public int pegarUlitmoJogador(){
@@ -131,6 +136,7 @@ public class Tabuleiro {
         return indexUltimo;
     }
 
+
     public void ativarCasaMagica(Jogador jogador){
         int indexUltimoJogador = pegarUlitmoJogador();
         int casaUltimoJogador;
@@ -144,11 +150,11 @@ public class Tabuleiro {
         System.out.println("Voce caiu na casa magica, trocara posicao com o ultimo jogador");
 
 
-        casaUltimoJogador = jogadores.get(indexUltimoJogador).posição;
-        jogadores.get(indexUltimoJogador).posição = jogador.posição;
+        casaUltimoJogador = jogadores.get(indexUltimoJogador).getPosição();
+        jogadores.get(indexUltimoJogador).posição = jogador.getPosição();
         jogador.posição = casaUltimoJogador;
 
-        System.out.printf("Posicao atual: %d\n", jogador.posição);
+        System.out.printf("Posicao atual: %d\n", jogador.getPosição());
 
     }
 
@@ -158,12 +164,16 @@ public class Tabuleiro {
                 ativarCasaDoAzar(jogador);
                 break;
 
+            case 13:
+                ativarCasaDeMudança(jogador);
+                break;
+
             case 5,15,30:
                 ativarCasasDaSorte(jogador);
                 break;
 
             case 17,27: 
-                ativarCasaDeTroca();
+                ativarCasaDaDiscordia();
                 break;
             
             case 20,35:
@@ -181,7 +191,7 @@ public class Tabuleiro {
     }
 
     public void setRodada(int rodada){
-        this.rodada=rodada;
+        this.rodada += rodada;
     }
 
     public ArrayList<Jogador> getJogadores() {

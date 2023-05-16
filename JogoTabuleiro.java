@@ -17,11 +17,13 @@ public class JogoTabuleiro {
                 //aqui irá a tela de add jogador e iniciar jogo.
 
                 opcao = leitor.nextInt();
+                clearBuffer(leitor);
 
                 if(opcao == 2 ){
                     newJogador = partida.definirJogador();
                     if(partida.addJogador(newJogador)){
                         newJogador.setCor(partida.getJogadores().indexOf(newJogador));
+                        System.out.println("jogador " + newJogador.getCor() + " adicionado com sucesso :)");
                     } else 
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
 
@@ -33,6 +35,7 @@ public class JogoTabuleiro {
             }
 
         do{
+            partida.setRodada(1);
             for (Jogador jogador : partida.getJogadores()) {
                 //aqui irá a tela de iniciar as jogadas "vez do jogador fulano..."
                 if(jogador.podeJogar == false){
@@ -40,18 +43,31 @@ public class JogoTabuleiro {
                     continue;
                 }
                 System.out.println("Aperte enter para rolar os dados");
-                leitor.nextLine();
+                comando = leitor.nextLine();
+
+                System.out.println(partida.getRodada());
+                
+
                 dados = jogador.jogarDados();
                 jogador.setPosição(dados);
+                //mostrar posição 
                 partida.checkCasasEspeciais(jogador);
-                menu.mostrarJogadores(partida.getJogadores());
-                if(jogador.posição == 40){  
+                
+                if(jogador.posição >= 40){  
+                    jogador.setPosição();
+                    jogador.setPosição(40);
                     checkGanhador = true;
                     break;
                 }
+                menu.mostrarJogadores(partida.getJogadores());
             }
 
         }while(checkGanhador != true);
         leitor.close();
-}   
+    }   
+    private static void clearBuffer(Scanner scanner) {
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
+    }
 }

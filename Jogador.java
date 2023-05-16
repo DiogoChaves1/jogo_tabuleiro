@@ -53,6 +53,10 @@ public abstract class Jogador {
 
     public void setPosição(int posição) {
         this.posição += posição;
+    
+    }
+    public void setPosição() {
+        posição = 0;
     }
 
     public int getTurno() {
