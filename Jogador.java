@@ -4,8 +4,8 @@ public abstract class Jogador {
     protected int turno;
     protected boolean podeJogar;
 
-    public Jogador(String cor){
-        this.cor=cor;
+    public Jogador(){
+        cor= "";
         posição = 0;
         turno = 0;
         podeJogar = true;
@@ -43,13 +43,16 @@ public abstract class Jogador {
                 break;
         }
     }
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
 
     public int getPosição() {
         return posição;
     }
 
     public void setPosição(int posição) {
-        this.posição = posição;
+        this.posição += posição;
     }
 
     public int getTurno() {

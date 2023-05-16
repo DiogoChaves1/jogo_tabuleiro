@@ -8,24 +8,27 @@ public class Tabuleiro {
         rodada = 0;
         jogadores = new ArrayList<Jogador>();
     }
-    public void definirJogador(String cor){
+    public Jogador definirJogador(){
         Random gerador = new Random();
         int sorteioTipo= gerador.nextInt(2);
         Jogador newJogador;
         switch(sorteioTipo){
             case 0:
-                newJogador = new JogadorNormal(cor);
+                newJogador = new JogadorNormal();
+                return newJogador;
             
             case 1:
-                newJogador = new JogadorAzarado(cor);
-            
+                newJogador = new JogadorAzarado();
+                return newJogador;
+
             default:
-                newJogador = new JogadorSortudo(cor);
+                newJogador = new JogadorSortudo();
+                return newJogador;
         }
     }
 
     public boolean addJogador(Jogador newJogador){
-        if(jogadores.contains(newJogador) || jogadores.size() > 5 )
+        if(jogadores.size() == 6 )
             return false;
 
         jogadores.add(newJogador);
@@ -44,7 +47,8 @@ public class Tabuleiro {
 
         switch(tipo){    
             case 0:
-                JogadorAzarado newJogadorAzarado = new JogadorAzarado(jogador.getCor());
+                JogadorAzarado newJogadorAzarado = new JogadorAzarado();
+                newJogadorAzarado.setCor(jogador.getCor());
 
                 newJogadorAzarado.setPosição(jogador.getPosição());
                 newJogadorAzarado.setTurno(jogador.getTurno());
@@ -52,7 +56,8 @@ public class Tabuleiro {
             
                 return 0;
             case 1:
-                JogadorSortudo newJogadorSortudo =new JogadorSortudo(jogador.getCor());
+                JogadorSortudo newJogadorSortudo = new JogadorSortudo();
+                newJogadorSortudo.setCor(jogador.getCor());
 
                 newJogadorSortudo.setPosição(jogador.getPosição());
                 newJogadorSortudo.setTurno(jogador.getTurno());
@@ -60,7 +65,8 @@ public class Tabuleiro {
             
                 return 1;
             default:
-                JogadorNormal newJogadorNormal = new JogadorNormal(jogador.getCor());
+                JogadorNormal newJogadorNormal = new JogadorNormal();
+                newJogadorNormal.setCor(jogador.getCor());
 
                 newJogadorNormal.setPosição(jogador.getPosição());
                 newJogadorNormal.setTurno(jogador.getTurno());
@@ -146,8 +152,8 @@ public class Tabuleiro {
 
     }
 
-    public void checkCasasEspeciais(Jogador jogador, int posição){
-        switch (posição) {
+    public void checkCasasEspeciais(Jogador jogador){
+        switch (jogador.getPosição()) {
             case 10,25,38:
                 ativarCasaDoAzar(jogador);
                 break;

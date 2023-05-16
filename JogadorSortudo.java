@@ -1,8 +1,8 @@
 import java.util.Random;
 public class JogadorSortudo extends Jogador{
     
-    public JogadorSortudo(String cor){
-        super(cor);
+    public JogadorSortudo(){
+        super();
     }
     public int jogarDados(){
         Random gerador = new Random();
