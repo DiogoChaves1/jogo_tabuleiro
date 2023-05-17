@@ -51,4 +51,32 @@ public class Menu {
         }
         System.out.println("________________________________________________");
     }
+
+    public void mostrarMenuCasasEspeciais(int casaEspecial) {
+        switch(casaEspecial) {
+            case 1:
+                System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
+                break;
+
+            case 2:
+                System.out.println("Surpresa! A partir de agora voce e um novo jogador!");
+                break;
+
+            case 3:
+                System.out.println("Voce esta em uma casa da sorte. anda +3 casas");
+                break;
+            
+            case 4: 
+                System.out.println("Voce esta em uma casa da Discordia, escolha a cor do jogador que deseja mandar para tras");
+                break;
+            
+            case 5:
+                System.out.println("Voce caiu em uma casa magica, trocara posicao com o ultimo jogador");
+                break;
+
+            default:
+            break;
+
+        }
+    }
 }
