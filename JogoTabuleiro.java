@@ -23,9 +23,7 @@ public class JogoTabuleiro {
                         break;
                     }
                     else{
-                        System.out.println("________________________________________________");
-                        System.out.println("Necessário ao menos dois jogadores para começar");
-                        System.out.println("________________________________________________");
+                        menu.enviarMensagemErro();
                         opcao=0;
                     }
                 }
@@ -34,12 +32,11 @@ public class JogoTabuleiro {
                     if(partida.addJogador(newJogador)){
                         newJogador.setCor(partida.getJogadores().indexOf(newJogador));
                         menu.mostrarTelaDeAdição(newJogador);
-                      //  System.out.println("jogador " + newJogador.getCor() + " adicionado com sucesso :)");
                     } else 
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
 
                     //aqui irá a tela das informações do jogador criado. (cor e tipo)
-
+                    menu.mostrarDadosDeJogadores(partida.getJogadores());
 
                 }
                 
@@ -49,22 +46,22 @@ public class JogoTabuleiro {
             partida.setRodada(1);
             System.out.println("RODADA DE NUMERO - " + partida.getRodada());
             for (Jogador jogador : partida.getJogadores()) {
-                //aqui irá a tela de iniciar as jogadas "vez do jogador fulano..."
-                // tela mostrando as casas no início da rodada
+                menu.iniciarJogadas(jogador);
+                menu.mostrarJogadores(partida.getJogadores());
 
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);
                     continue;
                 }
-
+                do{
                 System.out.println("Aperte enter para rolar os dados");
                 comando = leitor.nextLine();
-                
                 dados = jogador.jogarDados();
                 jogador.setPosição(dados);
                 //mostrar posição 
                 partida.checkCasasEspeciais(jogador);
-                
+                }while(jogador.isJogaDadosNovamente());
+
                 if(jogador.posição >= 40){  
                     jogador.setPosição();
                     jogador.setPosição(40);
@@ -75,6 +72,7 @@ public class JogoTabuleiro {
             }
 
         }while(checkGanhador != true);
+        System.out.println("Fim de jogo");
         leitor.close();
     }   
     private static void clearBuffer(Scanner scanner) {

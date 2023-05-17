@@ -9,10 +9,17 @@ public class JogadorSortudo extends Jogador{
         int dado1, dado2;
 
         do{
-            dado1=gerador.nextInt(6)+1;
-            dado2=gerador.nextInt(6)+1;
-        } while( dado1 + dado2 < 7 );
-
+            dado1 = gerador.nextInt(6)+1;
+            dado2 = gerador.nextInt(6)+1;
+        }
+         while( dado1 + dado2 < 7 );
+        
+         if(dado1==dado2){
+            jogaDadosNovamente=true;
+         }
+         else{
+            jogaDadosNovamente=false;
+         } 
         return dado1+dado2;
     }
 

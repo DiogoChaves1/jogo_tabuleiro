@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Thread;
 
 public class Menu {
 
@@ -51,6 +52,30 @@ public class Menu {
         }
         System.out.println("________________________________________________");
     }
+    public void mostrarDadosDeJogadores(ArrayList<Jogador> jogadores){
+        for (Jogador jogador : jogadores) {
+            System.out.println("__________________________________________");
+            System.out.println("jogador: "+jogador.getCor()+" - "+jogador.getClass().getSimpleName());
+        }
+        System.out.println("__________________________________________");
+
+    }
+
+    public void enviarMensagemErro(){
+        System.out.println("________________________________________________");
+        System.out.println("Necessário ao menos dois jogadores para começar");
+        System.out.println("________________________________________________");
+    }
+
+    public void iniciarJogadas(Jogador jogador){
+        System.out.println("------------    VEZ DO JOGADOR " + jogador.getCor() + "    ------------");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // TODO: handle exception
+        }
+    }
+        
 
     public void mostrarMensagemInicialCasasEspeciais(int casaEspecial) {
         switch(casaEspecial) {
@@ -79,6 +104,7 @@ public class Menu {
 
         }
     }
+<<<<<<< HEAD
 
     public void mostrarMensagemFinalCasasEspeciais(int casaEspecial, Jogador jogador) {
         switch(casaEspecial) {
@@ -111,4 +137,7 @@ public class Menu {
 
         }
     }
+=======
+    
+>>>>>>> 25aada657f2e06d9c3286b22e14fb884d56f60fe
 }
