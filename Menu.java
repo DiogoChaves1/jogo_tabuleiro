@@ -52,7 +52,7 @@ public class Menu {
         System.out.println("________________________________________________");
     }
 
-    public void mostrarMenuCasasEspeciais(int casaEspecial) {
+    public void mostrarMensagemInicialCasasEspeciais(int casaEspecial) {
         switch(casaEspecial) {
             case 1:
                 System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
@@ -72,6 +72,38 @@ public class Menu {
             
             case 5:
                 System.out.println("Voce caiu em uma casa magica, trocara posicao com o ultimo jogador");
+                break;
+
+            default:
+            break;
+
+        }
+    }
+
+    public void mostrarMensagemFinalCasasEspeciais(int casaEspecial, Jogador jogador) {
+        switch(casaEspecial) {
+            case 1: 
+                System.out.println(jogador.getCor()+" deixou de jogar uma rodada " + "Posicao: " + jogador.posição);
+                break;
+            case 2:
+                if(jogador instanceof JogadorNormal) 
+                    System.out.println("Tudo normal por aqui... Voce se tornou um Jogador Normal");
+                else if(jogador instanceof JogadorSortudo) 
+                    System.out.println("Que azar! Voce se tornou um Jogador Azarado");
+                else
+                    System.out.println("Parabens! Voce se tornou um Jogador Sortudo");
+                break;
+
+            case 3:
+                System.out.println("Voce andou mais 3 casas " + jogador.posição);
+                break;
+
+            case 4:
+                System.out.println("Voce mandou um jogador para o inicio do jogo!");
+                break;
+
+            case 5:
+                System.out.println("Voce trocou de posicao com o ultimo jogador " + jogador.posição);
                 break;
 
             default:
