@@ -49,8 +49,8 @@ public class JogoTabuleiro {
             partida.setRodada(1);
             System.out.println("RODADA DE NUMERO - " + partida.getRodada());
             for (Jogador jogador : partida.getJogadores()) {
-                //aqui irá a tela de iniciar as jogadas "vez do jogador fulano..."
-                // tela mostrando as casas no início da rodada
+                menu.iniciarJogadas(jogador);
+                menu.mostrarJogadores(partida.getJogadores());
 
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);

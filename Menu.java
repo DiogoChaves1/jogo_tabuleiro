@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Thread;
 
 public class Menu {
 
@@ -50,5 +51,16 @@ public class Menu {
 
         }
         System.out.println("________________________________________________");
+    }
+
+    public void iniciarJogadas(Jogador jogador){
+        System.out.println("------------    VEZ DO JOGADOR " + jogador.getCor() + "    ------------");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            // TODO: handle exception
+        }
+        
+
     }
 }
