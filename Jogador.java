@@ -3,12 +3,14 @@ public abstract class Jogador {
     protected int posição;
     protected int turno;
     protected boolean podeJogar;
+    protected boolean jogaDadosNovamente;
 
     public Jogador(){
         cor= "";
         posição = 0;
         turno = 0;
         podeJogar = true;
+        jogaDadosNovamente = false;
     }
 
     public String toString() {
@@ -73,6 +75,13 @@ public abstract class Jogador {
 
     public void setPodeJogar(boolean podeJogar) {
         this.podeJogar = podeJogar;
+    }
+    public boolean isJogaDadosNovamente() {
+        return jogaDadosNovamente;
+    }
+
+    public void setJogaDadosNovamente(boolean jogaDadosNovamente) {
+        this.jogaDadosNovamente = jogaDadosNovamente;
     }
 
 }

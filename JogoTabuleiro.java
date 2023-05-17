@@ -34,7 +34,6 @@ public class JogoTabuleiro {
                     if(partida.addJogador(newJogador)){
                         newJogador.setCor(partida.getJogadores().indexOf(newJogador));
                         menu.mostrarTelaDeAdição(newJogador);
-                      //  System.out.println("jogador " + newJogador.getCor() + " adicionado com sucesso :)");
                     } else 
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
 
@@ -53,17 +52,17 @@ public class JogoTabuleiro {
                     partida.checkCasasEspeciais(jogador);
                     continue;
                 }
+                System.out.println(partida.getRodada());
+
+                do{
                 System.out.println("Aperte enter para rolar os dados");
                 comando = leitor.nextLine();
-
-                System.out.println(partida.getRodada());
-                
-
                 dados = jogador.jogarDados();
                 jogador.setPosição(dados);
                 //mostrar posição 
                 partida.checkCasasEspeciais(jogador);
-                
+                }while(jogador.isJogaDadosNovamente());
+
                 if(jogador.posição >= 40){  
                     jogador.setPosição();
                     jogador.setPosição(40);
@@ -74,6 +73,7 @@ public class JogoTabuleiro {
             }
 
         }while(checkGanhador != true);
+        System.out.println("Fim de jogo");
         leitor.close();
     }   
     private static void clearBuffer(Scanner scanner) {
