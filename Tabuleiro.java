@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
+    Menu menu = new Menu();
     private int rodada;
 
     public Tabuleiro(){
@@ -162,6 +163,7 @@ public class Tabuleiro {
         switch (jogador.getPosição()) {
             case 10,25,38:
                 ativarCasaDoAzar(jogador);
+                menu.mostrarMenuCasasEspeciais(1);
                 break;
 
             case 13:

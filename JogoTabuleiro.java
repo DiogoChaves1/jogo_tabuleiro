@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.IOException;
 
 public class JogoTabuleiro {
 
@@ -17,6 +18,8 @@ public class JogoTabuleiro {
                 menu.mostrarMenuInicial();
                 opcao = leitor.nextInt();
                 clearBuffer(leitor);
+                menu.ClearConsole();
+                menu.mostrarTransição(1100);
 
                 if(opcao==1){
                     if(partida.getJogadores().size()>1){
@@ -29,14 +32,20 @@ public class JogoTabuleiro {
                 }
                 else if(opcao == 2 ){
                     newJogador = partida.definirJogador();
+
                     if(partida.addJogador(newJogador)){
                         newJogador.setCor(partida.getJogadores().indexOf(newJogador));
+
                         menu.mostrarTelaDeAdição(newJogador);
-                    } else 
+                        menu.mostrarTransição(4500);
+                        menu.ClearConsole();
+                    } else {  
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
+                    }
 
                     //aqui irá a tela das informações do jogador criado. (cor e tipo)
                     menu.mostrarDadosDeJogadores(partida.getJogadores());
+                    System.out.println("");
 
                 }
                 
@@ -54,7 +63,7 @@ public class JogoTabuleiro {
                     continue;
                 }
                 do{
-                System.out.println("Aperte enter para rolar os dados");
+                System.out.println("\nAperte enter para rolar os dados");
                 comando = leitor.nextLine();
                 dados = jogador.jogarDados();
                 jogador.setPosição(dados);

@@ -4,10 +4,11 @@ import java.lang.Thread;
 public class Menu {
 
     public void mostrarJogadores(ArrayList<Jogador> jogadores) {
-        System.out.println();
+        System.out.println("____RANKING____");
         for(Jogador jogador: jogadores) {
             System.out.println(jogador.toString());
         }
+        System.out.println();
     }
     public void mostrarMenuInicial(){
         System.out.println("________________________________________");
@@ -53,12 +54,15 @@ public class Menu {
         System.out.println("________________________________________________");
     }
     public void mostrarDadosDeJogadores(ArrayList<Jogador> jogadores){
+        System.out.println("               JOGADORES          ");
         for (Jogador jogador : jogadores) {
             System.out.println("__________________________________________");
             System.out.println("jogador: "+jogador.getCor()+" - "+jogador.getClass().getSimpleName());
         }
         System.out.println("__________________________________________");
 
+        mostrarTransição(3000);
+        ClearConsole();
     }
 
     public void enviarMensagemErro(){
@@ -68,9 +72,14 @@ public class Menu {
     }
 
     public void iniciarJogadas(Jogador jogador){
-        System.out.println("------------    VEZ DO JOGADOR " + jogador.getCor() + "    ------------");
+        System.out.println("------------    Vez Do Jogador " + jogador.getCor() + "    ------------");
+        mostrarTransição(2000);
+        ClearConsole();
+    }
+
+    public void mostrarTransição(int tempo){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(tempo);
         } catch (InterruptedException ex) {
             // TODO: handle exception
         }
@@ -104,5 +113,25 @@ public class Menu {
 
         }
     }
-    
+
+    public void ClearConsole(){
+        try{
+            String operatingSystem = System.getProperty("os.name"); //Check the current operating system
+              
+            if(operatingSystem.contains("Windows")){
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            } else {
+                ProcessBuilder pb = new ProcessBuilder("clear");
+                Process startProcess = pb.inheritIO().start();
+
+                startProcess.waitFor();
+            } 
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }
+    
+
