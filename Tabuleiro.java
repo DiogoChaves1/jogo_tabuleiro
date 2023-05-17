@@ -10,9 +10,14 @@ public class Tabuleiro {
         jogadores = new ArrayList<Jogador>();
     }
     public Jogador definirJogador(){
-        Random gerador = new Random();
-        int sorteioTipo= gerador.nextInt(2);
         Jogador newJogador;
+        Random gerador = new Random();
+        int sorteioTipo;
+        if(jogadores.size()==1){
+            return gerarJogadorDiferente();
+        }
+
+        sorteioTipo= gerador.nextInt(2);
         switch(sorteioTipo){
             case 0:
                 newJogador = new JogadorNormal();
@@ -26,6 +31,46 @@ public class Tabuleiro {
                 newJogador = new JogadorSortudo();
                 return newJogador;
         }
+    }
+    public Jogador gerarJogadorDiferente(){
+        Jogador newJogador;
+        Random gerador = new Random();
+        int sorteioTipo;
+
+            sorteioTipo= gerador.nextInt(1);
+            if(jogadores.get(0) instanceof JogadorNormal){
+                if(sorteioTipo==0){
+                    newJogador=new JogadorAzarado();
+                    return newJogador;
+                }
+                else{
+                    newJogador=new JogadorSortudo();
+                    return newJogador;
+                }
+
+            }
+            else if(jogadores.get(0) instanceof JogadorAzarado){
+                if(sorteioTipo==0){
+                    newJogador=new JogadorNormal();
+                    return newJogador;
+                }
+                else{
+                    newJogador=new JogadorSortudo();
+                    return newJogador;
+                }
+            }
+            else{
+                if(sorteioTipo==0){
+                    newJogador=new JogadorAzarado();
+                    return newJogador;
+                }
+                else{
+                    newJogador=new JogadorNormal();
+                    return newJogador;
+                }
+
+            }
+
     }
 
     public boolean addJogador(Jogador newJogador){

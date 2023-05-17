@@ -103,7 +103,6 @@ public class Menu {
 
         }
     }
-<<<<<<< HEAD
 
     public void mostrarMensagemFinalCasasEspeciais(int casaEspecial, Jogador jogador) {
         switch(casaEspecial) {
@@ -136,7 +135,5 @@ public class Menu {
 
         }
     }
-=======
     
->>>>>>> 25aada657f2e06d9c3286b22e14fb884d56f60fe
 }
