@@ -131,7 +131,6 @@ public class Tabuleiro {
             System.out.println("Voce eh um azarado, nao pode andar na casa da sorte");
         }
 
-        System.out.printf("Posicao atual: %d\n", jogador.posição);
     }
 
     public void ativarCasaDaDiscordia() {
@@ -141,7 +140,7 @@ public class Tabuleiro {
         Menu menu = new Menu();
 
         menu.mostrarMensagemInicialCasasEspeciais(4);
-        //aqui irá a tela de cores 
+ 
         menu.mostrarJogadores(jogadores);
 
         cor = entrada.nextLine();
@@ -160,9 +159,17 @@ public class Tabuleiro {
 
     public void ativarCasaDoAzar(Jogador jogador){
         
-        if(jogador.podeJogar == false)
-        jogador.podeJogar = true;
+        if(jogador.podeJogar == false){  
+            jogador.podeJogar = true;
+            
+            menu.mostrarMensagemFinalCasasEspeciais(1, jogador);
+            menu.mostrarTransição(2000);
+        }
         else{  
+            if(jogador.jogaDadosNovamente == true){
+                jogador.jogaDadosNovamente = false;
+                System.out.println("Voce ganhou um bilhete para jogar duas vezes, mas infelizmente uma ventania o levou...");
+            }
             menu.mostrarMensagemInicialCasasEspeciais(1);
             jogador.podeJogar = false;
         }
@@ -208,36 +215,34 @@ public class Tabuleiro {
             case 10,25,38:
                 ativarCasaDoAzar(jogador);
                 menu.mostrarTransição(4000);
-                menu.mostrarMensagemFinalCasasEspeciais(1, jogador);
-                menu.mostrarTransição(2000);
                 break;
 
             case 13:
                 ativarCasaDeMudança(jogador);
                 menu.mostrarTransição(4000);
                 menu.mostrarMensagemFinalCasasEspeciais(2, jogador);
-                menu.mostrarTransição(2000);
+                menu.mostrarTransição(3500);
                 break;
 
             case 5,15,30:
                 ativarCasasDaSorte(jogador);
                 menu.mostrarTransição(4000);
                 menu.mostrarMensagemFinalCasasEspeciais(3, jogador);
-                menu.mostrarTransição(2000);
+                menu.mostrarTransição(3500);
                 break;
 
             case 17,27: 
                 ativarCasaDaDiscordia();
                 menu.mostrarTransição(4000);
                 menu.mostrarMensagemFinalCasasEspeciais(4, jogador);
-                menu.mostrarTransição(2000);
+                menu.mostrarTransição(3500);
                 break;
             
             case 20,35:
                 ativarCasaMagica(jogador);
                 menu.mostrarTransição(4000);
                 menu.mostrarMensagemFinalCasasEspeciais(5, jogador);
-                menu.mostrarTransição(2000);
+                menu.mostrarTransição(3500);
                 break;
                 
             default:

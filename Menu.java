@@ -12,6 +12,15 @@ public class Menu {
         }
         System.out.println();
     }
+    public void mostrarJogadas(ArrayList<Jogador> jogadores) {
+        System.out.println("---------------------");
+        System.out.println("RELATORIO DA PARTIDA");
+        System.out.println("---------------------");
+        for(Jogador jogador: jogadores) {
+            System.out.println(jogador.getCor()+" , numero de jogadas:"+jogador.getTurno());
+        }
+        System.out.println();
+    }
     public void mostrarMenuInicial(){
         System.out.println("________________________________________");
         System.out.println("          Jogo de Tabuleiro");
@@ -119,7 +128,7 @@ public class Menu {
     public void mostrarMensagemFinalCasasEspeciais(int casaEspecial, Jogador jogador) {
         switch(casaEspecial) {
             case 1: 
-                System.out.println(jogador.getCor()+" deixou de jogar uma rodada " + "Posicao: " + jogador.posição);
+                System.out.println(jogador.getCor()+" deixou de jogar uma rodada, " + "Posicao: " + jogador.posição);
                 break;
             case 2:
                 if(jogador instanceof JogadorNormal) 
@@ -131,7 +140,9 @@ public class Menu {
                 break;
 
             case 3:
-                System.out.println("Voce andou mais 3 casas " + "Posicao: " + jogador.posição);
+                if(jogador instanceof JogadorAzarado)
+                break;
+                System.out.println("Voce andou mais 3 casas, " + "Posicao: " + jogador.posição);
                 break;
 
             case 4:
@@ -139,7 +150,7 @@ public class Menu {
                 break;
 
             case 5:
-                System.out.println("Voce trocou de posicao com o ultimo jogador " + "Posicao: " + jogador.posição);
+                System.out.println("Voce trocou de posicao com o ultimo jogador, " + "Posicao: " + jogador.posição);
                 break;
 
             default:

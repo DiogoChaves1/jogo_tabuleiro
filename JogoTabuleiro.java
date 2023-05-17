@@ -1,7 +1,5 @@
 import java.util.*;
-import java.io.IOException;
 
-import javax.lang.model.util.ElementScanner14;
 
 public class JogoTabuleiro {
 
@@ -13,7 +11,7 @@ public class JogoTabuleiro {
         
         int dados, opcao = 0; 
         boolean checkGanhador = false;
-        String comando;
+        String comando, vencedor="";
 
 
             while(opcao != 1){
@@ -54,17 +52,23 @@ public class JogoTabuleiro {
 
         do{
             partida.setRodada(1);
-            System.out.println("---------------   RODADA " + partida.getRodada()+    "   ---------------");
             for (Jogador jogador : partida.getJogadores()) {
+                menu.mostrarTransição(3000);
+                menu.ClearConsole();
+                System.out.println("---------------   RODADA " + partida.getRodada()+    "   ---------------");
                 
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);
                     continue;
                                }
                 do{
-                    if(jogador.isJogaDadosNovamente()){  
+                    if(jogador.isJogaDadosNovamente()){ 
+                        if(jogador.posição >= 40)
+                            break; 
                         System.out.println("---------------- "+jogador.getCor() + " joga novamente ----------------");
                         menu.mostrarTransição(1200);
+                        jogador.setTurno(1);
+
                     }
                     menu.iniciarJogadas(jogador);
                     menu.mostrarJogadores(partida.getJogadores());
@@ -72,23 +76,31 @@ public class JogoTabuleiro {
                     System.out.println("Aperte enter para rolar os dados");
                     comando = leitor.nextLine();
                     dados = jogador.jogarDados();
+                    menu.mostrarMensagemFinalCasasEspeciais(1, jogador);
+                    jogador.setTurno(1);
+                    menu.mostrarTransição(4000);
+                    menu.ClearConsole();
                     jogador.setPosição(dados);
-                //mostrar posição 
-                partida.checkCasasEspeciais(jogador);
-                menu.ClearConsole();
+                 
+                    partida.checkCasasEspeciais(jogador);
+                    menu.ClearConsole();
                 }while(jogador.isJogaDadosNovamente());
 
                 if(jogador.posição >= 40){  
                     jogador.setPosição();
                     jogador.setPosição(40);
                     checkGanhador = true;
+                    vencedor=jogador.getCor();
                     break;
                 }
                 menu.mostrarJogadores(partida.getJogadores());
             }
 
         }while(checkGanhador != true);
-        System.out.println("Fim de jogo");
+        menu.mostrarJogadas(partida.getJogadores());
+        System.out.println("----------------------------------------");
+        System.out.println("O jogador "+vencedor+" é o campeão");
+        System.out.println("----------------------------------------");
         leitor.close();
     }   
     private static void clearBuffer(Scanner scanner) {

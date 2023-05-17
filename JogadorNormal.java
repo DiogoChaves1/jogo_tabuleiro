@@ -20,6 +20,8 @@ public class JogadorNormal extends Jogador {
             jogaDadosNovamente=false;
          } 
         
+         System.out.println(cor+" tirou "+dado1+" e "+dado2+", ande "+(dado1+dado2)+" casas");
+
         return dado1 + dado2;
     }
 

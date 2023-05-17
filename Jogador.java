@@ -5,6 +5,7 @@ public abstract class Jogador {
     protected boolean podeJogar;
     protected boolean jogaDadosNovamente;
 
+
     public Jogador(){
         cor= "";
         posição = 0;
@@ -66,7 +67,7 @@ public abstract class Jogador {
     }
 
     public void setTurno(int turno) {
-        this.turno = turno;
+        this.turno += turno;
     }
 
     public boolean isPodeJogar() {
