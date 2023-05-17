@@ -36,18 +36,19 @@ public class JogoTabuleiro {
 
         do{
             partida.setRodada(1);
+            System.out.println("RODADA DE NUMERO - " + partida.getRodada());
             for (Jogador jogador : partida.getJogadores()) {
                 //aqui irá a tela de iniciar as jogadas "vez do jogador fulano..."
+                // tela mostrando as casas no início da rodada
+
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);
                     continue;
                 }
+
                 System.out.println("Aperte enter para rolar os dados");
                 comando = leitor.nextLine();
-
-                System.out.println(partida.getRodada());
                 
-
                 dados = jogador.jogarDados();
                 jogador.setPosição(dados);
                 //mostrar posição 
