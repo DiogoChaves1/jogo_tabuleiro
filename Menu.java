@@ -60,6 +60,7 @@ public class Menu {
         } catch (InterruptedException ex) {
             // TODO: handle exception
         }
+    }
         
 
     public void mostrarMenuCasasEspeciais(int casaEspecial) {
@@ -89,4 +90,5 @@ public class Menu {
 
         }
     }
+    
 }
