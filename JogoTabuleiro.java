@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.IOException;
 
+import javax.lang.model.util.ElementScanner14;
+
 public class JogoTabuleiro {
 
     public static void main(String args[]){
@@ -30,7 +32,7 @@ public class JogoTabuleiro {
                         opcao=0;
                     }
                 }
-                else if(opcao == 2 ){
+                else{
                     newJogador = partida.definirJogador();
 
                     if(partida.addJogador(newJogador)){
