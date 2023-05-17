@@ -43,7 +43,6 @@ public class JogoTabuleiro {
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
                     }
 
-                    //aqui irá a tela das informações do jogador criado. (cor e tipo)
                     menu.mostrarDadosDeJogadores(partida.getJogadores());
                     System.out.println("");
 
@@ -53,22 +52,28 @@ public class JogoTabuleiro {
 
         do{
             partida.setRodada(1);
-            System.out.println("RODADA DE NUMERO - " + partida.getRodada());
+            System.out.println("---------------   RODADA " + partida.getRodada()+    "   ---------------");
             for (Jogador jogador : partida.getJogadores()) {
-                menu.iniciarJogadas(jogador);
-                menu.mostrarJogadores(partida.getJogadores());
-
+                
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);
                     continue;
-                }
+                               }
                 do{
-                System.out.println("\nAperte enter para rolar os dados");
-                comando = leitor.nextLine();
-                dados = jogador.jogarDados();
-                jogador.setPosição(dados);
+                    if(jogador.isJogaDadosNovamente()){  
+                        System.out.println("---------------- "+jogador.getCor() + " joga novamente ----------------");
+                        menu.mostrarTransição(1200);
+                    }
+                    menu.iniciarJogadas(jogador);
+                    menu.mostrarJogadores(partida.getJogadores());
+
+                    System.out.println("Aperte enter para rolar os dados");
+                    comando = leitor.nextLine();
+                    dados = jogador.jogarDados();
+                    jogador.setPosição(dados);
                 //mostrar posição 
                 partida.checkCasasEspeciais(jogador);
+                menu.ClearConsole();
                 }while(jogador.isJogaDadosNovamente());
 
                 if(jogador.posição >= 40){  

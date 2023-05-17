@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Tabuleiro {
     private ArrayList<Jogador> jogadores;
-    Menu menu = new Menu();
     private int rodada;
+    Menu menu  = new Menu();
 
     public Tabuleiro(){
         rodada = 0;
@@ -46,6 +46,7 @@ public class Tabuleiro {
         int tipo, indexJogador=jogadores.indexOf(jogador);
         tipo = gerador.nextInt(2);
 
+        menu.mostrarMensagemInicialCasasEspeciais(2);
         switch(tipo){    
             case 0:
                 JogadorAzarado newJogadorAzarado = new JogadorAzarado();
@@ -79,7 +80,7 @@ public class Tabuleiro {
 
     public void ativarCasasDaSorte(Jogador jogador) {
         if( jogador instanceof JogadorNormal || jogador instanceof JogadorSortudo) {
-            System.out.println("Voce esta em uma casa da sorte. anda +3 casas");
+            menu.mostrarMensagemInicialCasasEspeciais(3);
             jogador.setPosição(3);
         }else {
             System.out.println("Voce eh um azarado, nao pode andar na casa da sorte");
@@ -94,8 +95,7 @@ public class Tabuleiro {
         Scanner entrada = new Scanner(System.in);
         Menu menu = new Menu();
 
-        System.out.println("Voce esta em uma casa da Discordia, escolha a cor do jogador em que deseja mandar pra tras");
-
+        menu.mostrarMensagemInicialCasasEspeciais(4);
         //aqui irá a tela de cores 
         menu.mostrarJogadores(jogadores);
 
@@ -118,7 +118,7 @@ public class Tabuleiro {
         if(jogador.podeJogar == false)
         jogador.podeJogar = true;
         else{  
-            System.out.println("Voce caiu na casa do azar... fique uma rodada sem jogar!");
+            menu.mostrarMensagemInicialCasasEspeciais(1);
             jogador.podeJogar = false;
         }
     }
@@ -148,8 +148,7 @@ public class Tabuleiro {
             return;
         }
 
-        System.out.println("Voce caiu na casa magica, trocara posicao com o ultimo jogador");
-
+        menu.mostrarMensagemInicialCasasEspeciais(5);
 
         casaUltimoJogador = jogadores.get(indexUltimoJogador).getPosição();
         jogadores.get(indexUltimoJogador).posição = jogador.getPosição();
@@ -163,23 +162,37 @@ public class Tabuleiro {
         switch (jogador.getPosição()) {
             case 10,25,38:
                 ativarCasaDoAzar(jogador);
-                menu.mostrarMenuCasasEspeciais(1);
+                menu.mostrarTransição(4000);
+                menu.mostrarMensagemFinalCasasEspeciais(1, jogador);
+                menu.mostrarTransição(2000);
                 break;
 
             case 13:
                 ativarCasaDeMudança(jogador);
+                menu.mostrarTransição(4000);
+                menu.mostrarMensagemFinalCasasEspeciais(2, jogador);
+                menu.mostrarTransição(2000);
                 break;
 
             case 5,15,30:
                 ativarCasasDaSorte(jogador);
+                menu.mostrarTransição(4000);
+                menu.mostrarMensagemFinalCasasEspeciais(3, jogador);
+                menu.mostrarTransição(2000);
                 break;
 
             case 17,27: 
                 ativarCasaDaDiscordia();
+                menu.mostrarTransição(4000);
+                menu.mostrarMensagemFinalCasasEspeciais(4, jogador);
+                menu.mostrarTransição(2000);
                 break;
             
             case 20,35:
                 ativarCasaMagica(jogador);
+                menu.mostrarTransição(4000);
+                menu.mostrarMensagemFinalCasasEspeciais(5, jogador);
+                menu.mostrarTransição(2000);
                 break;
                 
             default:
