@@ -51,4 +51,18 @@ public class Menu {
         }
         System.out.println("________________________________________________");
     }
+    public void mostrarDadosDeJogadores(ArrayList<Jogador> jogadores){
+        for (Jogador jogador : jogadores) {
+            System.out.println("__________________________________________");
+            System.out.println("jogador: "+jogador.getCor()+" - "+jogador.getClass().getSimpleName());
+        }
+        System.out.println("__________________________________________");
+
+    }
+
+    public void enviarMensagemErro(){
+        System.out.println("________________________________________________");
+        System.out.println("Necessário ao menos dois jogadores para começar");
+        System.out.println("________________________________________________");
+    }
 }

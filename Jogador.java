@@ -76,7 +76,7 @@ public abstract class Jogador {
     public void setPodeJogar(boolean podeJogar) {
         this.podeJogar = podeJogar;
     }
-    public boolean isJogaDadosNovamente() {
+     public boolean isJogaDadosNovamente() {
         return jogaDadosNovamente;
     }
 

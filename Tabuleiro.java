@@ -142,7 +142,7 @@ public class Tabuleiro {
         int casaUltimoJogador;
 
         if(indexUltimoJogador == jogadores.indexOf(jogador)) {  
-            System.out.println("O jogador " + jogador.cor  + "ja esta na ultima posicao... :´( )");
+            System.out.println("O jogador " + jogador.cor  + "ja esta na ultima posicao... :´( ");
 
             return;
         }

@@ -23,9 +23,7 @@ public class JogoTabuleiro {
                         break;
                     }
                     else{
-                        System.out.println("________________________________________________");
-                        System.out.println("Necessário ao menos dois jogadores para começar");
-                        System.out.println("________________________________________________");
+                        menu.enviarMensagemErro();
                         opcao=0;
                     }
                 }
@@ -38,7 +36,7 @@ public class JogoTabuleiro {
                     System.out.println("Limite de jogadores atingido, você só pode criar 6 jogadores");
 
                     //aqui irá a tela das informações do jogador criado. (cor e tipo)
-
+                    menu.mostrarDadosDeJogadores(partida.getJogadores());
 
                 }
                 
@@ -46,14 +44,15 @@ public class JogoTabuleiro {
 
         do{
             partida.setRodada(1);
+            System.out.println("RODADA DE NUMERO - " + partida.getRodada());
             for (Jogador jogador : partida.getJogadores()) {
                 //aqui irá a tela de iniciar as jogadas "vez do jogador fulano..."
+                // tela mostrando as casas no início da rodada
+
                 if(jogador.podeJogar == false){
                     partida.checkCasasEspeciais(jogador);
                     continue;
                 }
-                System.out.println(partida.getRodada());
-
                 do{
                 System.out.println("Aperte enter para rolar os dados");
                 comando = leitor.nextLine();
